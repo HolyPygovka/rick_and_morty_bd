@@ -25,7 +25,7 @@ export default class Api {
     getCharacter = async (id) => {
         const response = await this.instance.get(`character/${id}`);
         const result = response.data;
-        console.log(result);
+        return result;
     }
 
     getEpisodeName = async (url) => {
