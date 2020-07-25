@@ -10,7 +10,7 @@ export default class Character extends React.Component {
 
     state = {
         firstEpisodeName: null,
-        id: 14
+        id: this.props.id
     }
 
     componentDidMount() {

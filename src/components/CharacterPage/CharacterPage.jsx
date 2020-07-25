@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Api from '../../API';
 
@@ -8,10 +8,18 @@ const CharacterPage = () => {
 
     let { id } = useParams();
 
+    const [name, setName] = useState();
+    const [gender, setGender] = useState();
+    const [image, setImage] = useState();
+    const [species, setSpecies] = useState();
+
     useEffect(() =>  {
         async function getCharacter(id) {
             const character = await rickMortyApi.getCharacter(id);
-            console.log(character);
+            setName(character.name);
+            setGender(character.gender);
+            setImage(character.image);
+            setSpecies(character.species);
         }
 
         getCharacter(id);
@@ -21,8 +29,12 @@ const CharacterPage = () => {
     return(
         
         <div className="CharacterPage">
-            <h1>character name</h1>
-            CharacterPage - {id}
+            <h1>{name}</h1>
+            <div className="characterBlock">
+                <div>{gender}</div>
+                <div><img src={image} alt={`${name}`} /></div>
+                <div>{species}</div>
+            </div>
         </div>
     );
 }
