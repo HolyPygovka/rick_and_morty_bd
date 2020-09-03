@@ -1,21 +1,11 @@
 import React from 'react';
 import './CharactersList.css';
-import Api from '../../API';
 import Character from '../Character';
 import { connect } from 'react-redux';
 import Spinner from '../Spinner';
 
 class CharactersList extends React.Component {
 
-    rickMortyApi = new Api();
-
-    componentDidMount() {
-        this.rickMortyApi.getAllCharacters()
-            .then((data) => {
-                this.props.setCharacters(data)
-            });
-    }
-    
     render() {
         const { characters } = this.props;
 
@@ -30,6 +20,7 @@ class CharactersList extends React.Component {
                         gender={item.gender}
                         currentLocation={item.location.name}
                         firstEpisodeUrl={item.episode[0]}
+                        firstEpisodeName={item.firstEpisodeName}
                         id={item.id}
                     />
                 </li>
@@ -57,13 +48,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setCharacters: (data) => dispatch({
-            type: 'IS_CHARACTERS',
-            payload: data
-        })
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CharactersList);
+export default connect(mapStateToProps)(CharactersList);
